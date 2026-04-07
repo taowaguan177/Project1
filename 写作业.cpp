@@ -1,15 +1,29 @@
 #include <iostream>
+#include<vector>
 using namespace std;
 int main() {
-    int n; cin >> n;
-    int result;
-    /*TODO: if n is a odd number ,result is 3 times of n and then plus 1
-      if n is a even number ,result is the half of n;*/
-    if (n % 2 != 0) {
-             n = 3 * n + 1;
-         }
-         else { n = n / 2; }
-     result = n;
-    cout << result << endl;
+    int m, n;
+    cin >> m >> n;
+    vector<bool>monkeys(m, true);
+	int current = 0;
+	int count = 0;
+	int remaining = m;
+    while (remaining > 1) {
+                if (monkeys[current]) {
+            count++;
+            if (count == n) {
+                monkeys[current] = false;
+                count = 0;
+                remaining--;
+            }
+        }
+				current = (current + 1) % m;
+    }
+    for(int i = 0; i < m; i++) {
+        if (monkeys[i]) {
+            cout <<"king: "<< i + 1 << endl;
+            break;
+        }
+	}
     return 0;
 }
